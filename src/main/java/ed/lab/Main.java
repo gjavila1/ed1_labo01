@@ -1,73 +1,75 @@
 package ed.lab;
-import java.util.Random; // Se implemento esta libreria para obtener este
+
+import java.util.Random;
 
 public class Main {
-    private static final ArrayGenerator<Integer> sortedArrayGenerator = length -> {
-        Integer[] array = new Integer[length];
-        for (int i = 0; i < length; i++) {
-            array[i] = i + 1; // Genera un arreglo ordenado de menor a mayor
+    private static final ArrayGenerator<String> sortedArrayGenerator = (int length) -> {
+
+        String[] array = new String[length];
+        for(int i = 0; i<length ; i++ ){
+
+            array[i] = String.valueOf(i);
         }
         return array;
     };
-    // Reemplácelo por una función lambda
 
-    // Generador de arreglo ordenado descendentemente
-    private static final ArrayGenerator<Integer> invertedArrayGenerator = length -> {
-        Integer[] array = new Integer[length];
-        for (int i = 0; i < length; i++) {
-            array[i] = length - i; // Arreglo ordenado de mayor a menor
+    ///
+
+
+    private static final ArrayGenerator<String> invertedArrayGenerator = (int length) -> {
+
+        String[] array = new String[length];
+        for(int i = 0; i<length ; i++){
+
+            array[i] = String.valueOf(length-1-i);
         }
         return array;
     };
-    // Reemplácelo por una función lambda
 
-    private static final ArrayGenerator<Integer> randomArrayGenerator = length -> {
-        Integer[] array = new Integer[length];
+    private static final ArrayGenerator<String> randomArrayGenerator = (int length) -> {
         Random random = new Random();
-        for (int i = 0; i < length; i++) {
-            array[i] = random.nextInt(100);
+        String[] array = new String[length];
+        for(int i = 0; i<length ; i++){
+
+            array[i] = String.valueOf(random.nextInt(100));
         }
         return array;
     };
-    // Reemplácelo por una función lambda
 
+    private static final QuickSort<String> highPivotQuickSort =  array -> SortingAlgorithms.highPivotQuickSort(array); // Reemplácelo por una referencia a un método
 
-    private static final QuickSort<Integer> highPivotQuickSort = SortingAlgorithms::highPivotQuickSort; // Reemplácelo por una referencia a un método
+    private static final QuickSort<String> lowPivotQuickSort = array -> SortingAlgorithms.lowPivotQuickSort(array); // Reemplácelo por una referencia a un método
 
-    private static final QuickSort<Integer> lowPivotQuickSort = SortingAlgorithms::lowPivotQuickSort; // Reemplácelo por una referencia a un método
+    private static final QuickSort<String> randomPivotQuickSort = array -> SortingAlgorithms.randomPivotQuickSort(array); // Reemplácelo por una referencia a un método
 
-    private static final QuickSort<Integer> randomPivotQuickSort = SortingAlgorithms::randomPivotQuickSort; // Reemplácelo por una referencia a un método
-
-
-
-    public static QuickSort<Integer> getHighPivotQuickSort() {
+    public static QuickSort<String> getHighPivotQuickSort() {
         return highPivotQuickSort;
     }
 
-    public static QuickSort<Integer> getLowPivotQuickSort() {
+    public static QuickSort<String> getLowPivotQuickSort() {
         return lowPivotQuickSort;
     }
 
-    public static QuickSort<Integer> getRandomPivotQuickSort() {
+    public static QuickSort<String> getRandomPivotQuickSort() {
         return randomPivotQuickSort;
     }
 
-    public static ArrayGenerator<Integer> getSortedArrayGenerator() {
+    public static ArrayGenerator<String> getSortedArrayGenerator() {
         return sortedArrayGenerator;
     }
 
-    public static ArrayGenerator<Integer> getInvertedArrayGenerator() {
+    public static ArrayGenerator<String> getInvertedArrayGenerator() {
         return invertedArrayGenerator;
     }
 
-    public static ArrayGenerator<Integer> getRandomArrayGenerator() {
+    public static ArrayGenerator<String> getRandomArrayGenerator() {
         return randomArrayGenerator;
     }
 
     public static void main(String[] args) {
-        final SortingTester<Integer> tester = new SortingTester<>();
+        final SortingTester<String> tester = new SortingTester<>();
 
-        System.out.println("Ordenando un arreglo ordenado:");
+        System.out.println("Ordenando un arreglo ordenado: ");
         System.out.println("\tUtilizando el último elemento como pivote: ");
         tester.testSorting(sortedArrayGenerator, highPivotQuickSort);
         System.out.println("\tUtilizando el primer elemento como pivote: ");
@@ -93,5 +95,7 @@ public class Main {
         System.out.println("\tUtilizando un elemento aleatorio como pivote: ");
         tester.testSorting(randomArrayGenerator, randomPivotQuickSort);
         System.out.println("================================");
+
+
     }
 }
